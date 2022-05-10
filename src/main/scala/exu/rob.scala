@@ -312,13 +312,6 @@ class Rob(
     val rob_predicated = Reg(Vec(numRobRows, Bool())) // Was this instruction predicated out?
     val rob_fflags    = Mem(numRobRows, Bits(freechips.rocketchip.tile.FPConstants.FLAGS_SZ.W))
 
-
-    for ( i <- 0 until numRobRows) {
-      dontTouch(rob_uop(i).debug_pc)
-      dontTouch(rob_uop(i).debug_inst)
-    }
-
-
     val rob_debug_wdata = Mem(numRobRows, UInt(xLen.W))
 
     //-----------------------------------------------
@@ -485,7 +478,6 @@ class Rob(
 
     // -----------------------------------------------
     // Outputs
-
     rob_head_vals(w)     := rob_val(rob_head)
     rob_tail_vals(w)     := rob_val(rob_tail)
     rob_head_fflags(w)   := rob_fflags(rob_head)
